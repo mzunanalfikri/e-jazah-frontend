@@ -32,7 +32,6 @@ import {
   Row,
   Col
 } from "reactstrap";
-
 import { url } from "const";
 import axios from "axios";
 
@@ -60,11 +59,13 @@ class Login extends React.Component {
     axios.post(url + "/login", payload).then(res => {
       console.log(res)
       sessionStorage.setItem("token", res.data.token)
-      axios.defaults.headers.common['Authorization'] = "Bearer " + sessionStorage.getItem('token')
-      axios.get(url + "/ijazah").then(res => {
-        console.log(res.data)
-      })
-    }).catch(res => {
+      document.cookie = "role=" + res.data.role
+      const { history } = this.props
+      if (history) {
+        history.push("/")
+      }
+    }).catch(err => {
+      console.log(err)
       alert("Username atau password salah.")
     })
   }

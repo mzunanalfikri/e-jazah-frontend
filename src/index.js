@@ -23,20 +23,30 @@ import "assets/vendor/nucleo/css/nucleo.css";
 import "assets/vendor/font-awesome/css/font-awesome.min.css";
 import "assets/scss/argon-design-system-react.scss?v1.1.0";
 
-import Index from "views/Index.js";
-import Landing from "views/examples/Landing.js";
+import Reference from "views/reference";
+import Landing from "views/public/Landing";
 import Login from "views/public/Login";
 import Profile from "views/examples/Profile.js";
 import Register from "views/examples/Register.js";
+import LandingExample from "views/examples/Landing"
+import Logout from "views/public/Logout"
+import CreateInstitutionAccount from "views/admin/CreateInstitutionAccount"
+import Prof from "views/user/Profile"
+import NotFound from "views/public/404"
 
 ReactDOM.render(
   <BrowserRouter>
     <Switch>
-      <Route path="/" exact render={props => <Index {...props} />} />
+      <Route path="/" exact render={props => <Landing {...props} />} />
+      <Route
+        path="/reference"
+        exact
+        render={props => <Reference {...props} />}
+      />
       <Route
         path="/landing-page"
         exact
-        render={props => <Landing {...props} />}
+        render={props => <LandingExample {...props} />}
       />
       <Route path="/login-page" exact render={props => <Login {...props} />} />
       <Route
@@ -53,6 +63,28 @@ ReactDOM.render(
         path="/login"
         exact
         render={props => <Login {...props} />}
+      />
+      <Route
+        path="/logout"
+        exact
+        render={props => <Logout {...props} />}
+      />
+      <Route
+        path="/404"
+        exact
+        render={props => <NotFound {...props} />}
+      />
+      {/* Admin path */}
+      <Route
+        path="/create-institution-account"
+        exact
+        render={props => <CreateInstitutionAccount {...props} />}
+      />
+      {/* General User Path */}
+      <Route
+        path="/profile"
+        exact
+        render={props => <Prof {...props} />}
       />
       <Redirect to="/" />
     </Switch>

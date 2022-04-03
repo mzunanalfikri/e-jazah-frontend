@@ -16,6 +16,7 @@
         @include transition($navbar-transition);
 
         .nav-link-inner--text {
+            color: white;
             margin-left: .25rem;
         }
     }
