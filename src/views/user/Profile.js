@@ -121,8 +121,12 @@ class Profile extends React.Component {
         element : compo
       })
     }).catch(err => {
-      alert(err)
-
+      if (err.response.status === 403) {
+        alert("Sesi habis, mohon login lagi")
+        this.props.history.push("/logout")
+      } else {
+        alert(err)
+      }
     })
   }
 

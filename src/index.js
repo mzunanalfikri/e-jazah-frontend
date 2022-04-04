@@ -31,13 +31,14 @@ import Register from "views/examples/Register.js";
 import LandingExample from "views/examples/Landing"
 import Logout from "views/public/Logout"
 import CreateInstitutionAccount from "views/admin/CreateInstitutionAccount"
+import CreateStudentAccount from "views/institution/CreateStudentAccount";
+import CreateIjazah from "views/institution/CreateIjazah";
 import Prof from "views/user/Profile"
 import NotFound from "views/public/404"
 
 ReactDOM.render(
   <BrowserRouter>
     <Switch>
-      <Route path="/" exact render={props => <Landing {...props} />} />
       <Route
         path="/reference"
         exact
@@ -59,15 +60,12 @@ ReactDOM.render(
         exact
         render={props => <Register {...props} />}
       />
+      {/* Public path */}
+      <Route path="/" exact render={props => <Landing {...props} />} />
       <Route
         path="/login"
         exact
         render={props => <Login {...props} />}
-      />
-      <Route
-        path="/logout"
-        exact
-        render={props => <Logout {...props} />}
       />
       <Route
         path="/404"
@@ -80,11 +78,27 @@ ReactDOM.render(
         exact
         render={props => <CreateInstitutionAccount {...props} />}
       />
+      {/* Institution path */}
+      <Route
+        path="/create-student-account"
+        exact
+        render={props => <CreateStudentAccount {...props} />}
+      />
+      <Route
+        path="/create-ijazah"
+        exact
+        render={props => <CreateIjazah {...props} />}
+      />
       {/* General User Path */}
       <Route
         path="/profile"
         exact
         render={props => <Prof {...props} />}
+      />
+      <Route
+        path="/logout"
+        exact
+        render={props => <Logout {...props} />}
       />
       <Redirect to="/" />
     </Switch>
