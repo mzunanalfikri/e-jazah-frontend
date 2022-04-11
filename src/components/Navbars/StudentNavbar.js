@@ -110,7 +110,7 @@ class DemoNavbar extends React.Component {
                 </Nav>
 
                 <Nav className="navbar-nav-hover align-items-lg-center ml-lg-4" navbar>
-                    <Link to="/">
+                    <Link to="/my-ijazah">
                       <span className="nav-link-inner--text">Ijazah Saya</span>
                     </Link>
                 </Nav>

@@ -182,6 +182,7 @@ class CustomControls extends React.Component {
               <input defaultChecked type="checkbox" />
               <span className="custom-toggle-slider rounded-circle" />
             </label>
+            <input type="checkbox" checked data-toggle="toggle"></input>
           </Col>
           <Col className="mt-4 mt-md-0" lg="3" sm="6">
             <div className="mb-3">

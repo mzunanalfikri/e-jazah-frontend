@@ -16,7 +16,6 @@
 
 */
 import React from "react";
-import Cookies from "js-cookie";
 
 // reactstrap components
 import {
@@ -65,7 +64,7 @@ class Profile extends React.Component {
     this.handleInputChange = this.handleInputChange.bind(this);
     this.changePassword = this.changePassword.bind(this);
 
-    let role = Cookies.get('role')
+    let role = sessionStorage.getItem('role')
     if (role === 'admin') {
       Navbar = AdminNavbar
       this.getProfile()

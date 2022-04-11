@@ -35,6 +35,10 @@ import CreateStudentAccount from "views/institution/CreateStudentAccount";
 import CreateIjazah from "views/institution/CreateIjazah";
 import Prof from "views/user/Profile"
 import NotFound from "views/public/404"
+import ListIjazahAdmin from "views/admin/ListIjazah"
+import ListIjazahInstitution from "views/institution/ListIjazah"
+import ListIjazaHStudent from "views/student/ListIjazah"
+import PublicIjazah from "views/public/Ijazah"
 
 ReactDOM.render(
   <BrowserRouter>
@@ -68,6 +72,11 @@ ReactDOM.render(
         render={props => <Login {...props} />}
       />
       <Route
+        path="/ijazah/:nik"
+        exact
+        render={props => <PublicIjazah {...props} />}
+      />
+      <Route
         path="/404"
         exact
         render={props => <NotFound {...props} />}
@@ -77,6 +86,11 @@ ReactDOM.render(
         path="/create-institution-account"
         exact
         render={props => <CreateInstitutionAccount {...props} />}
+      />
+      <Route
+        path="/list-ijazah-admin"
+        exact
+        render={props => <ListIjazahAdmin {...props} />}
       />
       {/* Institution path */}
       <Route
@@ -88,6 +102,17 @@ ReactDOM.render(
         path="/create-ijazah"
         exact
         render={props => <CreateIjazah {...props} />}
+      />
+      <Route
+        path="/list-ijazah-institution"
+        exact
+        render={props => <ListIjazahInstitution {...props} />}
+      />
+      {/* Student path */}
+      <Route
+        path="/my-ijazah"
+        exact
+        render={props => <ListIjazaHStudent {...props} />}
       />
       {/* General User Path */}
       <Route

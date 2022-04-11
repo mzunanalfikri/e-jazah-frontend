@@ -59,7 +59,8 @@ class Login extends React.Component {
     axios.post(url + "/login", payload).then(res => {
       console.log(res)
       sessionStorage.setItem("token", res.data.token)
-      document.cookie = "role=" + res.data.role
+      sessionStorage.setItem("role", res.data.role)
+      sessionStorage.setItem("id", res.data.id)
       const { history } = this.props
       if (history) {
         history.push("/")

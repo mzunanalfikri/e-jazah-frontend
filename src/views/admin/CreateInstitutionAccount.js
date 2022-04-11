@@ -69,8 +69,6 @@ class CreateInstitutionAccount extends React.Component {
         this.setState({
             modal: !this.state.modal
         })
-
-        console.log(this.state.modal)
     }
 
     render () {
@@ -147,7 +145,7 @@ class CreateInstitutionAccount extends React.Component {
                             </ModalHeader>
                             <ModalBody >
                                 {this.state.loading ? <Spinner/> : 
-                                    <table className="table-bordered">
+                                    <table className="table">
                                         <thead>
                                             <tr>
                                                 <th> Baris </th>
