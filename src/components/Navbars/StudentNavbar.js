@@ -31,6 +31,7 @@ import {
   Row,
   Col,
 } from "reactstrap";
+import "assets/css/custom.css"
 
 class DemoNavbar extends React.Component {
   componentDidMount() {
@@ -105,19 +106,19 @@ class DemoNavbar extends React.Component {
 
                 <Nav className="navbar-nav-hover align-items-lg-center ml-lg-4" navbar>
                     <Link to="/">
-                      <span className="nav-link-inner--text">Verivikasi</span>
+                      <span className="nav-link-inner--text navbar-custom">Verifikasi</span>
                     </Link>
                 </Nav>
 
                 <Nav className="navbar-nav-hover align-items-lg-center ml-lg-4" navbar>
                     <Link to="/my-ijazah">
-                      <span className="nav-link-inner--text">Ijazah Saya</span>
+                      <span className="nav-link-inner--text navbar-custom">Ijazah Saya</span>
                     </Link>
                 </Nav>
 
                 <Nav className="navbar-nav-hover align-items-lg-center ml-lg-4" navbar>
                     <Link to="/profile">
-                      <span className="nav-link-inner--text">Profile</span>
+                      <span className="nav-link-inner--text navbar-custom">Profile</span>
                     </Link>
                 </Nav>
                 

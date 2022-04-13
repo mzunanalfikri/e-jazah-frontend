@@ -38,6 +38,7 @@ import {
   Col,
   UncontrolledTooltip
 } from "reactstrap";
+import "assets/css/custom.css"
 
 class DemoNavbar extends React.Component {
   componentDidMount() {

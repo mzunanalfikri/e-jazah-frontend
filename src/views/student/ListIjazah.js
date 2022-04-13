@@ -18,6 +18,7 @@ import Navbar from "components/Navbars/StudentNavbar";
 import CardsFooter from "components/Footers/CardsFooter.js";
 import axios from "axios";
 import { url } from "const"
+const frontend_url = "http://localhost:3000"
 // index page sections
 // import Download from "../IndexSections/Download.js";
 
@@ -27,8 +28,10 @@ class ListIjazah extends React.Component {
     element : null,
     id : sessionStorage.getItem('id'),
     isLinkOn : false,
-    linkLoading : false
+    linkLoading : false,
+    url : frontend_url + "/ijazah/" + sessionStorage.getItem('id')
   }
+
   constructor(props){
     super(props)
     this.detailIjazah = this.detailIjazah.bind(this)
@@ -134,7 +137,10 @@ class ListIjazah extends React.Component {
                       <Row className="text-center justify-content-center">
                         <Col lg="7">
                           <span>Share link Ijazah </span>
-                          <span>({url}/ijazah/{this.state.id})</span>
+                          <span>(<a href= {this.state.url} target="_blank" rel="noreferrer">{this.state.url}</a>)  </span>
+                          <span className="btn-inner--icon" onClick={() => {navigator.clipboard.writeText(this.state.url)}}>
+                            <i className="fa fa-copy mr-2" />
+                          </span>
                         </Col>
                         <Col lg="0.5">
                           <span>OFF</span>

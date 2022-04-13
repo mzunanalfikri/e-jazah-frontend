@@ -76,11 +76,14 @@ class CreateIjazah extends React.Component {
                     resultElement : res.data
                 })
             }).catch(err => {
+                this.toggle()
                 if (err.response.status === 403) {
                     alert("Sesi habis, mohon login lagi")
                     this.props.history.push("/logout")
                   } else {
-                    alert(err)
+
+                    alert(err.response.data.message)
+                    console.log(err.response)
                   }
             })
         } catch (error) {

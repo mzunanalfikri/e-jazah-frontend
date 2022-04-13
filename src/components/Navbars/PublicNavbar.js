@@ -26,12 +26,12 @@ import {
   UncontrolledCollapse,
   NavbarBrand,
   Navbar,
-  NavItem,
   Nav,
   Container,
   Row,
   Col,
 } from "reactstrap";
+import "assets/css/custom.css"
 
 class DemoNavbar extends React.Component {
   componentDidMount() {
@@ -113,7 +113,7 @@ class DemoNavbar extends React.Component {
 
                 <Nav className="navbar-nav-hover align-items-lg-center ml-lg-4" navbar>
                     <Link to="/">
-                      <span className="nav-link-inner--text">Verivikasi</span>
+                      <span className="nav-link-inner--text navbar-custom">Verifikasi</span>
                     </Link>
                 </Nav>
                 

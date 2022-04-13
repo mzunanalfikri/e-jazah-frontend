@@ -1,0 +1,7 @@
+.navbar-custom {
+    color: white;
+}
+
+.navbar-custom:hover {
+    color: rgb(197, 197, 197);
+}

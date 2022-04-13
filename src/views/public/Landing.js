@@ -203,21 +203,21 @@ handleInputChange(event){
                                       <span className="btn-inner--icon">
                                       <i className="fa fa-search mr-2" />
                                     </span>
-                                    Verivikasi File
+                                    Verifikasi File
                                 </Button>
                                 </div>
                             </Col>
                           </Row>
                 </div>
-                 <Modal isOpen={this.state.modal} centered={true} autoFocus={true} size="sm">
+                 <Modal isOpen={this.state.modal} toggle={this.toggle} centered={true} autoFocus={true} size="sm">
                     <ModalHeader >
                         Hasil Verifikasi
                     </ModalHeader>
                     <ModalBody >
                       {this.state.response.notVerified ? 
-                      <h4 className="text-center">Verifikasi Gagal</h4> : 
+                      <h4 className="text-center">VERIFIKASI GAGAL</h4> : 
                       <div >
-                        <h4 className="text-center">Ijazah terverifikasi</h4>
+                        <h4 className="text-center">IJAZAH TERVERIFIKASI</h4>
                         <p>Nama : {this.state.response.Name}</p>
                         <p>Institusi : {this.state.response.InstitutionName}</p>
                       </div> 

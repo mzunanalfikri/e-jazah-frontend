@@ -32,6 +32,7 @@ import {
   Row,
   Col,
 } from "reactstrap";
+import "assets/css/custom.css"
 
 class DemoNavbar extends React.Component {
   componentDidMount() {
