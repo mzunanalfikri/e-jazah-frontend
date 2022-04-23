@@ -13,6 +13,7 @@ import {
 // core components
 import Navbar from "components/Navbars/AdminNavbar";
 import CardsFooter from "components/Footers/CardsFooter.js";
+import DetailIjazah from "components/Modal/DetailIjazah"
 import axios from "axios";
 import { url } from "const"
 // index page sections
@@ -21,11 +22,15 @@ import { url } from "const"
 class ListIjazah extends React.Component {
   state = {
     loading : true,
-    element : null
+    element : null,
+    modal:false,
+    ijazah:{},
+    currentId:""
   }
   constructor(props){
     super(props)
     this.detailIjazah = this.detailIjazah.bind(this)
+    this.toggle = this.toggle.bind(this)
     axios.defaults.headers.common['Authorization'] = "Bearer " + sessionStorage.getItem('token')
     axios.get(url + "/ijazah/admin/all").then(res => {
       console.log(res.data)
@@ -53,7 +58,7 @@ class ListIjazah extends React.Component {
     return (
       <tbody>
         {data.map(el => (
-          <tr onClick={() => this.detailIjazah(el.ID)} key={el.ID}>
+          <tr onClick={() => this.detailIjazah(el)} key={el.ID}>
             <td>{el.ID}</td>
             <td>{el.StudentName}</td>
             <td>{el.InstitutionName}</td>
@@ -74,10 +79,26 @@ class ListIjazah extends React.Component {
     }
   }
 
-  detailIjazah(id){
-    // console.log(event.parentNode)
-    // make detail ijazah
-    console.log(id)
+  detailIjazah(ijazah){
+    this.toggle()
+    let ijazahData = this.state.ijazah
+    this.setState({currentId:ijazah.ID})
+    if (!ijazahData[ijazah.ID]){
+      axios.get(url + "/pdf/create-ijazah", {params: ijazah, responseType:"arraybuffer"}).then(res => {
+        // console.log(res.data)
+        ijazahData[ijazah.ID] = Buffer.from(res.data, 'binary').toString('base64')
+        console.log(ijazahData[ijazah.ID])
+        this.setState({
+          ijazah : ijazahData
+        })
+      })
+    }
+  }
+
+  toggle(){
+    this.setState({
+      modal: !this.state.modal
+    })
   }
 
   componentDidMount() {
@@ -118,6 +139,13 @@ class ListIjazah extends React.Component {
                     }
                   </CardBody>
                 </Card>
+                <DetailIjazah
+                  isOpen={this.state.modal}
+                  toggle={this.toggle}
+                  ijazah={this.state.ijazah}
+                  id={this.state.currentId}
+                >
+                </DetailIjazah>
               </Container>
               {/* SVG separator */}
               <div className="separator separator-bottom separator-skew">

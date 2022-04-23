@@ -16,6 +16,7 @@ import {
 // core components
 import Navbar from "components/Navbars/StudentNavbar";
 import CardsFooter from "components/Footers/CardsFooter.js";
+import DetailIjazah from "components/Modal/DetailIjazah"
 import axios from "axios";
 import { url } from "const"
 const frontend_url = "http://localhost:3000"
@@ -29,13 +30,17 @@ class ListIjazah extends React.Component {
     id : sessionStorage.getItem('id'),
     isLinkOn : false,
     linkLoading : false,
-    url : frontend_url + "/ijazah/" + sessionStorage.getItem('id')
+    url : frontend_url + "/ijazah/" + sessionStorage.getItem('id'),
+    modal:false,
+    ijazah:{},
+    currentId:""
   }
 
   constructor(props){
     super(props)
     this.detailIjazah = this.detailIjazah.bind(this)
     this.setIjazahLink = this.setIjazahLink.bind(this)
+    this.toggle = this.toggle.bind(this)
     axios.defaults.headers.common['Authorization'] = "Bearer " + sessionStorage.getItem('token')
     axios.get(url + "/ijazah/student/all").then(res => {
       console.log(res.data)
@@ -68,7 +73,7 @@ class ListIjazah extends React.Component {
     return (
       <tbody>
         {data.map(el => (
-          <tr onClick={() => this.detailIjazah(el.ID)} key={el.ID}>
+          <tr onClick={() => this.detailIjazah(el)} key={el.ID}>
             <td>{el.ID}</td>
             <td>{el.StudentName}</td>
             <td>{el.InstitutionName}</td>
@@ -89,10 +94,26 @@ class ListIjazah extends React.Component {
     }
   }
 
-  detailIjazah(id){
-    // console.log(event.parentNode)
-    // make detail ijazah
-    console.log(id)
+  detailIjazah(ijazah){
+    this.toggle()
+    let ijazahData = this.state.ijazah
+    this.setState({currentId:ijazah.ID})
+    if (!ijazahData[ijazah.ID]){
+      axios.get(url + "/pdf/create-ijazah", {params: ijazah, responseType:"arraybuffer"}).then(res => {
+        // console.log(res.data)
+        ijazahData[ijazah.ID] = Buffer.from(res.data, 'binary').toString('base64')
+        console.log(ijazahData[ijazah.ID])
+        this.setState({
+          ijazah : ijazahData
+        })
+      })
+    }
+  }
+
+  toggle(){
+    this.setState({
+      modal: !this.state.modal
+    })
   }
 
   setIjazahLink(){
@@ -183,6 +204,13 @@ class ListIjazah extends React.Component {
                     <br></br>
                     <br></br>
                 </Modal>
+                <DetailIjazah
+                  isOpen={this.state.modal}
+                  toggle={this.toggle}
+                  ijazah={this.state.ijazah}
+                  id={this.state.currentId}
+                >
+                </DetailIjazah>
               </Container>
               {/* SVG separator */}
               <div className="separator separator-bottom separator-skew">

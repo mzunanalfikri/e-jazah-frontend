@@ -87,19 +87,11 @@ onFileUpload(){
       const formData = new FormData()
       formData.append("file", this.state.selectedFile, this.state.selectedFile.name)
       
-      this.toggle()
-      console.log(this.state.selectedFile)
-
+      // this.toggle()
       axios.defaults.headers.common['Authorization'] = "Bearer " + sessionStorage.getItem('token')
-      axios.post(url + "/register-institution", formData).then(res => {
-          for (let index = 0; index < res.data.length; index++) {
-              const element = res.data[index];
-              console.log(element.message)
-          }
-          this.setState({
-              loading : false,
-              resultElement : res.data
-          })
+      axios.post(url + "/pdf/verify", formData).then(res => {
+        this.toggle()
+        this.setState({response:res.data})
       }).catch(err => {
           alert(err)
       })
