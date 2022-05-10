@@ -52,7 +52,11 @@ class ListIjazah extends React.Component {
   constructElement(data){
     if (data.length === 0){
       return (
-        <p>Tidak ada ijazah</p>
+        <tbody>
+          <tr>
+            <td colSpan={6}>Tidak ada ijazah</td>
+          </tr>
+        </tbody>
       )
     }
     return (

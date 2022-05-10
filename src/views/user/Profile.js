@@ -56,6 +56,7 @@ class Profile extends React.Component {
       element : null,
       modal : false,
       newPassword : "",
+      oldPassword : "",
       confirmNewPassword : "",
       waitPasswordChange : false
     }
@@ -156,15 +157,17 @@ class Profile extends React.Component {
       this.setState({waitPasswordChange : true})
       axios.defaults.headers.common['Authorization'] = "Bearer " + sessionStorage.getItem('token')
       let payload = {
+        old_password : this.state.oldPassword,
         password : this.state.newPassword
       }
       axios.post(url + "/change-password", payload).then(() => {
-        alert("Password berhasil diubah")
         this.toggle()
+        alert("Password berhasil diubah")
         this.setState({waitPasswordChange : false})
       }).catch(err => {
-        alert(err)
+        let errMsg = err.response.data
         this.toggle()
+        alert(errMsg)
         this.setState({waitPasswordChange : false})
       })
     }
@@ -222,6 +225,21 @@ class Profile extends React.Component {
               <ModalBody>
                 {this.state.waitPasswordChange ? <Spinner/> : 
                     <Form role="form">
+                        <FormGroup className="mb-3">
+                          <InputGroup className="input-group-alternative">
+                            <InputGroupAddon addonType="prepend">
+                              <InputGroupText>
+                                <i className="ni ni-lock-circle-open" />
+                              </InputGroupText>
+                            </InputGroupAddon>
+                            <Input 
+                              name="oldPassword"
+                              placeholder="Password Lama" 
+                              type="password" 
+                              value={this.state.oldPassword}
+                              onChange={this.handleInputChange} />
+                          </InputGroup>
+                        </FormGroup>
                         <FormGroup className="mb-3">
                           <InputGroup className="input-group-alternative">
                             <InputGroupAddon addonType="prepend">
